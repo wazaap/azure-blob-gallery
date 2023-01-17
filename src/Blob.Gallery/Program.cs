@@ -1,8 +1,13 @@
+using Blob.Gallery.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+//Register services
+builder.Services.AddTransient<BlobService>();
 
 var app = builder.Build();
 
