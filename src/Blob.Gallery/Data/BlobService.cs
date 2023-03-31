@@ -22,9 +22,6 @@ namespace Blob.Gallery.Data
             {
                 var blobClient = bloblContainerClient.GetBlobClient(blob.Name);
                 var name = blobClient.Name;
-                var name2 = blobClient.Name;
-
-
             }
         }
     }
