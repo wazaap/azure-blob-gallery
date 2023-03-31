@@ -21,7 +21,12 @@ namespace Blob.Gallery.Data
             foreach (var blob in blobs)
             {
                 var blobClient = bloblContainerClient.GetBlobClient(blob.Name);
-                var name = blobClient.Name;
+                using (var ms = new MemoryStream())
+                {
+                    blobClient.DownloadTo(ms);
+                    var name = blobClient.Name;
+                    var data = ms.ToArray();
+                }
             }
         }
     }
