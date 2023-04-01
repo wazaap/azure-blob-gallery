@@ -13,21 +13,17 @@ namespace Blob.Gallery.Data
         {
             _configuration = configuration;
         }
-        public void GetBlobs()
+        public List<BlobClient> GetBlobs()
         {
+            var blobClients = new List<BlobClient>();
             var blobServiceClient = new BlobServiceClient(_configuration["BlobGalleryConnectionString"]);
             var bloblContainerClient = blobServiceClient.GetBlobContainerClient("weddinggallery");
             var blobs = bloblContainerClient.GetBlobs();
             foreach (var blob in blobs)
             {
-                var blobClient = bloblContainerClient.GetBlobClient(blob.Name);
-                using (var ms = new MemoryStream())
-                {
-                    blobClient.DownloadTo(ms);
-                    var name = blobClient.Name;
-                    var data = ms.ToArray();
-                }
+                blobClients.Add(bloblContainerClient.GetBlobClient(blob.Name));
             }
+            return blobClients;
         }
     }
 }
