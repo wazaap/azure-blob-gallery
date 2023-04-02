@@ -30,15 +30,16 @@
         var count = blobClients.Count();
         foreach (var blobClient in blobClients)
         {
-            using (var ms = new MemoryStream())
-            {
-                blobClient.DownloadTo(ms);
-                Images.Add(new Models.Image
-                    {
-                        Name = blobClient.Name,
-                        Data = string.Format("data:image/jpeg;base64,{0}", Convert.ToBase64String(ms.ToArray()))
-                    });
-            }
+            Images.Add(new Models.Image { Name = blobClient.Name, Data = blobClient.Uri.AbsoluteUri});
+            //using (var ms = new MemoryStream())
+            //{
+            //    blobClient.DownloadTo(ms);
+            //    Images.Add(new Models.Image
+            //        {
+            //            Name = blobClient.Name,
+            //            Data = string.Format("data:image/jpeg;base64,{0}", Convert.ToBase64String(ms.ToArray()))
+            //        });
+            //}
         }
     }
 }
